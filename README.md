@@ -22,7 +22,7 @@
 ## Quick Start
 
 ```
-go get github.com/revett/neo-go-sdk
+go get github.com/CityOfZion/neo-go-sdk
 ```
 
 ```golang
