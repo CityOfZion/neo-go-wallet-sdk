@@ -31,7 +31,7 @@ package main
 import (
   "log"
 
-  "github.com/revett/neo-go-sdk/neo"
+  "github.com/CityOfZion/neo-go-sdk/neo"
 )
 
 func main() {
@@ -56,15 +56,15 @@ func main() {
 
 ## Examples
 
-Full documentation of how to use this package can be found: [docs/README.md](https://github.com/revett/neo-go-sdk/blob/master/docs)
+Full documentation of how to use this package can be found: [docs/README.md](https://github.com/CityOfZion/neo-go-sdk/blob/master/docs)
 
 ## Help
 
-- Open a new [issue](https://github.com/revett/neo-go-sdk/issues/new) if you encountered a problem.
+- Open a new [issue](https://github.com/CityOfZion/neo-go-sdk/issues/new) if you encountered a problem.
 - Or ping **@revett** on the [NEO Slack](https://join.slack.com/t/neoblockchainteam/shared_invite/MjE3ODMxNDUzMDE1LTE1MDA4OTY3NDQtNTMwM2MyMTc2NA).
 - Submitting PRs to the project is always welcome! 🎉
-- Check the [Changelog](https://github.com/revett/neo-go-sdk/blob/master/CHANGELOG.md) for recent changes.
+- Check the [Changelog](https://github.com/CityOfZion/neo-go-sdk/blob/master/CHANGELOG.md) for recent changes.
 
 ## License
 
-- Open-source [MIT](https://github.com/revett/neo-go-sdk/blob/master/LICENSE) 
+- Open-source [MIT](https://github.com/CityOfZion/neo-go-sdk/blob/master/LICENSE) 
