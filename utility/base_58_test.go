@@ -2,7 +2,6 @@ package utility_test
 
 import (
 	"encoding/hex"
-	"fmt"
 	"testing"
 
 	"github.com/CityOfZion/neo-go-sdk/utility"
@@ -61,8 +60,7 @@ func TestBase58(t *testing.T) {
 			for _, testCase := range testCases {
 				t.Run(testCase.description, func(t *testing.T) {
 					_, err := base58.Decode(testCase.in)
-					fmt.Println(err)
-					assert.Nil(t, err)
+					assert.NotNil(t, err)
 				})
 			}
 		})
