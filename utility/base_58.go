@@ -32,7 +32,7 @@ func NewBase58() Base58 {
 	return base58
 }
 
-// Decode decodes the base58 encoded bytes.
+// Decode decodes the base58 encoded string.
 func (b Base58) Decode(s string) ([]byte, error) {
 	source := []byte(s)
 	startIndex := 0
