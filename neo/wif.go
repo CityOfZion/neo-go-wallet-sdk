@@ -24,28 +24,28 @@ func NewWIF(s string) WIF {
 }
 
 // ToPrivateKey converts the WIF to private key format.
-func (w WIF) ToPrivateKey() (string, error) {
+func (w WIF) ToPrivateKey() (*PrivateKey, error) {
 	base58 := utility.NewBase58()
 
 	decoded, err := base58.Decode(w.Value)
 	if err != nil {
-		return "", err
+		return nil, err
 	}
 
 	if len(decoded) != 38 {
-		return "", fmt.Errorf(
+		return nil, fmt.Errorf(
 			"Expected length of decoded WIF to be 38, got: %d", len(decoded),
 		)
 	}
 
 	if decoded[0] != 0x80 {
-		return "", fmt.Errorf(
+		return nil, fmt.Errorf(
 			"Expected first byte of decoded WIF to be '0x80', got: %x", decoded[0],
 		)
 	}
 
 	if decoded[33] != 0x01 {
-		return "", fmt.Errorf(
+		return nil, fmt.Errorf(
 			"Expected 34th byte of decoded WIF to be '0x01', got: %x", decoded[33],
 		)
 	}
@@ -63,11 +63,13 @@ func (w WIF) ToPrivateKey() (string, error) {
 
 	for i, x := range firstFourBytes {
 		if x != lastFourBytes[i] {
-			return "", fmt.Errorf("WIF failed checksum validation")
+			return nil, fmt.Errorf("WIF failed checksum validation")
 		}
 	}
 
-	privateKey := decoded[1:33]
+	privateKey := NewPrivateKey(
+		hex.EncodeToString(decoded[1:33]),
+	)
 
-	return hex.EncodeToString(privateKey), nil
+	return &privateKey, nil
 }

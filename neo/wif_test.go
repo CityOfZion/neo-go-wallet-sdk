@@ -27,8 +27,8 @@ func TestWIF(t *testing.T) {
 					wif := neo.NewWIF(testCase.in)
 					privateKey, err := wif.ToPrivateKey()
 					assert.Nil(t, err)
-					assert.Equal(t, testCase.out, privateKey)
-					assert.Equal(t, 64, len(privateKey))
+					assert.Equal(t, testCase.out, privateKey.Value)
+					assert.Equal(t, 64, len(privateKey.Value))
 				})
 			}
 		})
