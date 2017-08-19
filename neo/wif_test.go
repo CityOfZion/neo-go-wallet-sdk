@@ -10,7 +10,7 @@ import (
 func TestWIF(t *testing.T) {
 	t.Run(".ToPrivateKey()", func(t *testing.T) {
 		t.Run("HappyCase", func(t *testing.T) {
-			wif := neo.NewWIF("L2QTooFoDFyRFTxmtiVHt5CfsXfVnexdbENGDkkrrgTTryiLsPMG")
+			wif := neo.NewWIF("5HueCGU8rMjxEXxiPuD5BDku4MkFqeZyd4dZ1jvhTVqvbTLvyTJ")
 
 			foo, err := wif.ToPrivateKey()
 			assert.Nil(t, err)
