@@ -1,6 +1,3 @@
-// Original work completed by @vsergeev: https://github.com/vsergeev/btckeygenie
-// Expanded upon here under MIT license.
-
 package utility
 
 import (
