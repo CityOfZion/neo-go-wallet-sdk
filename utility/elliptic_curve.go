@@ -4,7 +4,6 @@
 package utility
 
 import (
-	"errors"
 	"fmt"
 	"math/big"
 )
@@ -34,13 +33,13 @@ func NewEllipticCurve() EllipticCurve {
 func (e *EllipticCurve) Add(P, Q EllipticCurvePoint) (*EllipticCurvePoint, error) {
 	var resultPoint EllipticCurvePoint
 
-	if e.IsInfinity(P) && e.IsInfinity(Q) {
+	if e.isInfinity(P) && e.isInfinity(Q) {
 		resultPoint.X = nil
 		resultPoint.Y = nil
-	} else if e.IsInfinity(P) {
+	} else if e.isInfinity(P) {
 		resultPoint.X = new(big.Int).Set(Q.X)
 		resultPoint.Y = new(big.Int).Set(Q.Y)
-	} else if e.IsInfinity(Q) {
+	} else if e.isInfinity(Q) {
 		resultPoint.X = new(big.Int).Set(P.X)
 		resultPoint.Y = new(big.Int).Set(P.Y)
 	} else if P.X.Cmp(Q.X) == 0 && e.ma.Add(P.Y, Q.Y, e.P).Sign() == 0 {
@@ -100,49 +99,9 @@ func (e *EllipticCurve) Add(P, Q EllipticCurvePoint) (*EllipticCurvePoint, error
 	return &resultPoint, nil
 }
 
-// Decompress decompresses coordinate x and ylsb (y's least significant bit) into a
-// Point P on EllipticCurve ec.
-func (e *EllipticCurve) Decompress(x *big.Int, ylsb uint) (*EllipticCurvePoint, error) {
-	var resultPoint EllipticCurvePoint
-
-	rhs := e.ma.Add(
-		e.ma.Add(
-			e.ma.Exp(x, big.NewInt(3), e.P),
-			e.ma.Mul(e.A, x, e.P),
-			e.P,
-		),
-		e.B,
-		e.P,
-	)
-
-	y := e.ma.Sqrt(rhs, e.P)
-
-	if y.Bit(0) != (ylsb & 0x1) {
-		y = e.ma.Sub(big.NewInt(0), y, e.P)
-	}
-
-	resultPoint.X = x
-	resultPoint.Y = y
-
-	if !e.IsOnCurve(resultPoint) {
-		return nil, errors.New("compressed (x, ylsb) not on curve")
-	}
-
-	return &resultPoint, nil
-}
-
-// IsInfinity checks if point P is infinity on EllipticCurve ec.
-func (e *EllipticCurve) IsInfinity(point EllipticCurvePoint) bool {
-	if point.X == nil && point.Y == nil {
-		return true
-	}
-
-	return false
-}
-
 // IsOnCurve checks if point P is on EllipticCurve ec.
 func (e *EllipticCurve) IsOnCurve(point EllipticCurvePoint) bool {
-	if e.IsInfinity(point) {
+	if e.isInfinity(point) {
 		return false
 	}
 
@@ -208,4 +167,12 @@ func (e *EllipticCurve) ScalarMult(k *big.Int, P EllipticCurvePoint) (*EllipticC
 	}
 
 	return &R0, nil
+}
+
+func (e EllipticCurve) isInfinity(point EllipticCurvePoint) bool {
+	if point.X == nil && point.Y == nil {
+		return true
+	}
+
+	return false
 }
