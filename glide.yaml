@@ -1,5 +1,8 @@
 package: github.com/CityOfZion/neo-go-sdk
-import: []
+import:
+- package: github.com/apisit/btckeygenie
+  subpackages:
+  - btckey
 testImport:
 - package: github.com/stretchr/testify
   version: ^1.1.4
