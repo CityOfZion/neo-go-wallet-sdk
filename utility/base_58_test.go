@@ -73,4 +73,42 @@ func TestBase58(t *testing.T) {
 			}
 		})
 	})
+
+	t.Run(".Encode()", func(t *testing.T) {
+		t.Run("HappyCase", func(t *testing.T) {
+			testCases := []struct {
+				description string
+				in          string
+				out         string
+			}{
+				{
+					description: "Empty",
+					in:          "",
+					out:         "",
+				},
+				{
+					description: "Short",
+					in:          "4e19",
+					out:         "6wi",
+				},
+				{
+					description: "Long",
+					in:          "25793686e9f25b6b",
+					out:         "7GYJp3ZThFG",
+				},
+			}
+
+			base58 := utility.NewBase58()
+
+			for _, testCase := range testCases {
+				t.Run(testCase.description, func(t *testing.T) {
+					bytes, err := hex.DecodeString(testCase.in)
+					assert.NoError(t, err)
+
+					result := base58.Encode(bytes)
+					assert.Equal(t, testCase.out, result)
+				})
+			}
+		})
+	})
 }
