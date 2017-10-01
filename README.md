@@ -75,7 +75,7 @@ See [GoDoc](https://godoc.org/github.com/CityOfZion/neo-go-sdk/neo) for full doc
 
 ## CLI
 
-<img src="https://media.giphy.com/media/l378lQ91wOubO2tyw/giphy.gif" width="100%">
+<img src="https://res.cloudinary.com/vidsy/image/upload/v1506872790/Oct-01-2017_16-44-25_ovpier.gif" width="100%">
 
 Debugging a NEO public and private key pair is a common task when interacting with the blockchain.
 Make use of the **neo-go-sdk** CLI to help with this process:
