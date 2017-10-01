@@ -143,7 +143,7 @@ func (p PrivateKey) OutputBase64() string {
 	return base64.StdEncoding.EncodeToString(p.bytes)
 }
 
-// Signature is TODO.
+// Signature creates the signature using the private key.
 func (p PrivateKey) Signature() ([]byte, error) {
 	bytes, err := p.PublicKey()
 	if err != nil {
