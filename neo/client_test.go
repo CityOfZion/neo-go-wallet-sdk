@@ -76,13 +76,16 @@ func TestClient(t *testing.T) {
 	t.Run(".GetBlockHash()", func(t *testing.T) {
 		t.Run("HappyCase", func(t *testing.T) {
 			client := neo.NewClient(nodeURI)
-			blockIndex := int64(316675)
-			expectedBlockHash := "3f0b498c0d57f73c674a1e28045f5e9a0991f9dac214076fadb5e6bafd546170"
 
-			blockHash, err := client.GetBlockHash(blockIndex)
-			assert.NoError(t, err)
-			assert.NotEmpty(t, blockHash)
-			assert.Equal(t, expectedBlockHash, blockHash)
+			for _, testBlockHash := range testBlockHashes {
+				t.Run(testBlockHash.id, func(t *testing.T) {
+					blockHash, err := client.GetBlockHash(testBlockHash.index)
+
+					assert.NoError(t, err)
+					assert.NotEmpty(t, blockHash)
+					assert.Equal(t, testBlockHash.hash, blockHash)
+				})
+			}
 		})
 	})
 
@@ -149,25 +152,11 @@ func TestClient(t *testing.T) {
 		})
 
 		t.Run("SadCase", func(t *testing.T) {
-			testCases := []struct {
-				description string
-				uri         string
-			}{
-				{
-					description: "InvalidURI",
-					uri:         ")£*&%(£*&Q",
-				},
-				{
-					description: "OfflineURI",
-					uri:         "/foo",
-				},
-			}
-
-			for _, testCase := range testCases {
-				t.Run(testCase.description, func(t *testing.T) {
-					client := neo.NewClient(testCase.uri)
-
+			for _, testPing := range testPings {
+				t.Run(testPing.description, func(t *testing.T) {
+					client := neo.NewClient(testPing.uri)
 					ok := client.Ping()
+
 					assert.False(t, ok)
 				})
 			}

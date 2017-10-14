@@ -78,4 +78,30 @@ var (
 			value: "50",
 		},
 	}
+
+	testBlockHashes = []struct {
+		id    string
+		hash  string
+		index int64
+	}{
+		{
+			id:    "1",
+			index: 316675,
+			hash:  "0x3f0b498c0d57f73c674a1e28045f5e9a0991f9dac214076fadb5e6bafd546170",
+		},
+	}
+
+	testPings = []struct {
+		description string
+		uri         string
+	}{
+		{
+			description: "InvalidURI",
+			uri:         ")£*&%(£*&Q",
+		},
+		{
+			description: "OfflineURI",
+			uri:         "/foo",
+		},
+	}
 )
