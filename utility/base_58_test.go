@@ -46,6 +46,7 @@ func TestBase58(t *testing.T) {
 			for _, testCase := range testCases {
 				t.Run(testCase.description, func(t *testing.T) {
 					result, err := base58.Decode(testCase.in)
+
 					assert.NoError(t, err)
 					assert.Equal(t, testCase.out, hex.EncodeToString(result))
 				})
@@ -68,6 +69,7 @@ func TestBase58(t *testing.T) {
 			for _, testCase := range testCases {
 				t.Run(testCase.description, func(t *testing.T) {
 					_, err := base58.Decode(testCase.in)
+
 					assert.Error(t, err)
 				})
 			}
