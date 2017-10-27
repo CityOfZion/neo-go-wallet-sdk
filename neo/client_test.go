@@ -189,6 +189,14 @@ func TestClient(t *testing.T) {
 					})
 				}
 			})
+
+			t.Run("SadCase", func(t *testing.T) {
+				client := neo.NewClient(nodeURI)
+				isValid, err := client.ValidateAddress("wake-up-neo")
+
+				assert.NoError(t, err)
+				assert.False(t, isValid)
+			})
 		})
 	})
 }
