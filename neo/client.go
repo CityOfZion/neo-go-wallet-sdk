@@ -107,7 +107,8 @@ func (c Client) GetConnectionCount() (int64, error) {
 	return response.Result, nil
 }
 
-// GetStorage is TODO.
+// GetStorage takes a smart contract hash and a storage key, and returns the storage value
+// if available.
 func (c Client) GetStorage(scriptHash string, storageKey string) (string, error) {
 	requestBodyParams := []interface{}{
 		scriptHash, hex.EncodeToString([]byte(storageKey)),
