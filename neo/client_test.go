@@ -175,5 +175,20 @@ func TestClient(t *testing.T) {
 				})
 			}
 		})
+
+		t.Run(".ValidateAddress()", func(t *testing.T) {
+			t.Run("HappyCase", func(t *testing.T) {
+				client := neo.NewClient(nodeURI)
+
+				for _, testAccount := range testAccounts {
+					t.Run(testAccount.publicAddress, func(t *testing.T) {
+						isValid, err := client.ValidateAddress(testAccount.publicAddress)
+
+						assert.NoError(t, err)
+						assert.True(t, isValid)
+					})
+				}
+			})
+		})
 	})
 }
