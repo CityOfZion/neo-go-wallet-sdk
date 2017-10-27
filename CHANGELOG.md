@@ -18,11 +18,6 @@ storage, err := client.GetStorage(
 )
 ```
 
-### Changed
-
-- Updated client unit tests to adhere to the new JSON RPC hash representations.
-- Performed some general cleanup and organization in existing client unit tests.
-
 ## v1.6.1 - 2017-10-13
 
 ### Changed
