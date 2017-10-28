@@ -8,7 +8,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestAdd(t *testing.T) {
+func TestModularArithmeticAdd(t *testing.T) {
 	t.Run(".Add()", func(t *testing.T) {
 		t.Run("HappyCase", func(t *testing.T) {
 			testCases := []struct {
@@ -45,7 +45,7 @@ func TestAdd(t *testing.T) {
 	})
 }
 
-func TestExp(t *testing.T) {
+func TestModularArithmeticExp(t *testing.T) {
 	t.Run(".Exp()", func(t *testing.T) {
 		t.Run("HappyCase", func(t *testing.T) {
 			testCases := []struct {
@@ -82,7 +82,7 @@ func TestExp(t *testing.T) {
 	})
 }
 
-func TestInverse(t *testing.T) {
+func TestModularArithmeticInverse(t *testing.T) {
 	t.Run(".Inverse()", func(t *testing.T) {
 		t.Run("HappyCase", func(t *testing.T) {
 			testCases := []struct {
@@ -116,7 +116,7 @@ func TestInverse(t *testing.T) {
 	})
 }
 
-func TestMul(t *testing.T) {
+func TestModularArithmeticMul(t *testing.T) {
 	t.Run(".Mul()", func(t *testing.T) {
 		t.Run("HappyCase", func(t *testing.T) {
 			testCases := []struct {
@@ -153,7 +153,7 @@ func TestMul(t *testing.T) {
 	})
 }
 
-func TestSqrt(t *testing.T) {
+func TestModularArithmeticSqrt(t *testing.T) {
 	t.Run(".Sqrt()", func(t *testing.T) {
 		t.Run("HappyCase", func(t *testing.T) {
 			testCases := []struct {
@@ -181,7 +181,7 @@ func TestSqrt(t *testing.T) {
 	})
 }
 
-func TestSub(t *testing.T) {
+func TestModularArithmeticSub(t *testing.T) {
 	t.Run(".Sub()", func(t *testing.T) {
 		t.Run("HappyCase", func(t *testing.T) {
 			testCases := []struct {
