@@ -1,6 +1,7 @@
 package neo
 
 import (
+	"encoding/hex"
 	"net"
 	"net/url"
 
@@ -106,6 +107,22 @@ func (c Client) GetConnectionCount() (int64, error) {
 	return response.Result, nil
 }
 
+// GetStorage takes a smart contract hash and a storage key, and returns the storage value
+// if available.
+func (c Client) GetStorage(scriptHash string, storageKey string) (string, error) {
+	requestBodyParams := []interface{}{
+		scriptHash, hex.EncodeToString([]byte(storageKey)),
+	}
+	var response response.String
+
+	err := executeRequest("getstorage", requestBodyParams, c.NodeURI, &response)
+	if err != nil {
+		return "", err
+	}
+
+	return response.Result, nil
+}
+
 // GetTransaction returns the corresponding transaction information based on the
 // specified hash value.
 func (c Client) GetTransaction(hash string) (*models.Transaction, error) {
@@ -166,4 +183,42 @@ func (c Client) Ping() bool {
 	_ = conn.Close()
 
 	return true
+}
+
+// ValidateAddress takes a public NEO address and checks if it is valid.
+func (c Client) ValidateAddress(address string) (bool, error) {
+	requestBodyParams := []interface{}{
+		address,
+	}
+	var response response.StringMap
+
+	err := executeRequest("validateaddress", requestBodyParams, c.NodeURI, &response)
+	if err != nil {
+		return false, err
+	}
+
+	if _, ok := response.Result["address"]; !ok {
+		return false, nil
+	}
+
+	if _, ok := response.Result["address"].(string); !ok {
+		return false, nil
+	}
+
+	if _, ok := response.Result["isvalid"]; !ok {
+		return false, nil
+	}
+
+	if _, ok := response.Result["isvalid"].(bool); !ok {
+		return false, nil
+	}
+
+	returnedAddress := response.Result["address"].(string)
+	valid := response.Result["isvalid"].(bool)
+
+	if address == returnedAddress && valid {
+		return true, nil
+	}
+
+	return false, nil
 }
