@@ -11,6 +11,10 @@ project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 - Unit tests for `EllipticCurvePoint` and `EllipticCurve` types.
 
+### Fixed
+
+- Updated invalid fixture values for `testTransactionOutputs`.
+
 ## v1.8.0 - 2017-10-27
 
 ### Added
