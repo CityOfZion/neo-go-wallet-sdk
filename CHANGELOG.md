@@ -10,6 +10,11 @@ project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 ### Added
 
 - Unit tests for `EllipticCurvePoint` and `EllipticCurve` types.
+- Utility test functions for the `ModularArithmetic` unit tests.
+
+### Changed
+
+- `ModularArithmetic` unit tests actually use big integers.
 
 ### Fixed
 
