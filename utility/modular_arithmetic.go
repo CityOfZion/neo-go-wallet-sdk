@@ -48,9 +48,6 @@ func (m ModularArithmetic) Mul(x *big.Int, y *big.Int, p *big.Int) (z *big.Int) 
 }
 
 // Sqrt computes: sqrt(x) % p.
-//
-// TODO: I believe we should return an error here and bubble that upstream.
-// The caller can choose to handle that accordingly (i.e. panic).
 func (m ModularArithmetic) Sqrt(x *big.Int, p *big.Int) (z *big.Int) {
 	if new(big.Int).Mod(p, big.NewInt(4)).Cmp(big.NewInt(3)) != 0 {
 		panic("p is not equal to 3 mod 4!")
