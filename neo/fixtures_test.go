@@ -72,7 +72,7 @@ var (
 	}{
 		{
 			asset: "0xc56f33fc6ecfcd0c225c4ab356fee59390af8560be0e930faebe74a6daff7c9b",
-			hash:  "0xd30e2fe0bc3ecb1fde65f611a7f827268535ab19d2d2647d9984f35719185945",
+			hash:  "0x52176b26f5f984eee685e35ca72cc9fdc64800d4887a07b21f27f93936523832",
 			id:    "1",
 			index: 0,
 			value: "6",

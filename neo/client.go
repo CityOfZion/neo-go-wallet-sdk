@@ -3,6 +3,7 @@ package neo
 import (
 	"encoding/hex"
 	"errors"
+	"fmt"
 	"net"
 	"net/url"
 
@@ -204,13 +205,17 @@ func (c *Client) SelectBestNode() error {
 
 		blockCount, err := tempClient.GetBlockCount()
 		if err != nil {
-			return err
+			continue
 		}
 
 		if blockCount > highestBlock {
 			highestBlock = blockCount
 			bestNode = nodeURI
 		}
+	}
+
+	if bestNode == "" {
+		return fmt.Errorf("Unable to communicate with any nodes")
 	}
 
 	c.Node = bestNode
