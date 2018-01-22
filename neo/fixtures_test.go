@@ -72,10 +72,10 @@ var (
 	}{
 		{
 			asset: "0xc56f33fc6ecfcd0c225c4ab356fee59390af8560be0e930faebe74a6daff7c9b",
-			hash:  "0x52176b26f5f984eee685e35ca72cc9fdc64800d4887a07b21f27f93936523832",
+			hash:  "0x96fd0fc8a3cddbaac868647624c32cb8ac27f35cf249e4e6c8123601113d4017",
 			id:    "1",
 			index: 0,
-			value: "6",
+			value: "2",
 		},
 	}
 
