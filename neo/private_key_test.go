@@ -23,6 +23,24 @@ func TestPrivateKey(t *testing.T) {
 		})
 	})
 
+	t.Run("NewPrivateKey()", func(t *testing.T) {
+		t.Run("HappyCase", func(t *testing.T) {
+			privateKey, err := neo.NewPrivateKey()
+			assert.IsType(t, &neo.PrivateKey{}, privateKey)
+			assert.NoError(t, err)
+		})
+	})
+
+	t.Run("WIF()", func(t *testing.T) {
+		t.Run("HappyCase", func(t *testing.T) {
+			p, err := neo.NewPrivateKey()
+			assert.NoError(t, err)
+			wif, err := p.WIF()
+			assert.Equal(t, 52, len(wif))
+			assert.NoError(t, err)
+		})
+	})
+
 	t.Run(".Output()", func(t *testing.T) {
 		t.Run("HappyCase", func(t *testing.T) {
 			for i, account := range testAccounts {

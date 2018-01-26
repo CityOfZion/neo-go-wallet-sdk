@@ -2,6 +2,7 @@ package neo
 
 import (
 	"bytes"
+	"crypto/rand"
 	"crypto/sha256"
 	"encoding/base64"
 	"encoding/hex"
@@ -20,6 +21,43 @@ type (
 		bytes []byte
 	}
 )
+
+// NewPrivateKey creates a new random PrivateKey
+func NewPrivateKey() (*PrivateKey, error) {
+
+	bytes := make([]byte, 32)
+	_, err := rand.Read(bytes)
+	if err != nil {
+		return nil, err
+	}
+
+	return &PrivateKey{bytes: bytes}, nil
+}
+
+// WIF creates a WIF based on the private key
+func (p PrivateKey) WIF() (string, error) {
+
+	if len(p.bytes) != 32 {
+		return "", fmt.Errorf(
+			"Expected length of private key to be 32, got: %d", len(p.bytes),
+		)
+	}
+
+	var pre uint8 = 0x80
+	var ext uint8 = 0x01
+
+	bytes := append([]byte{pre}, p.bytes...)
+	bytes = append(bytes, ext)
+
+	firstSHA := sha256.Sum256(bytes)
+	secondSHA := sha256.Sum256(firstSHA[:])
+
+	wif := append(bytes, secondSHA[:4]...)
+
+	base58 := utility.NewBase58()
+	encodedWIF := base58.Encode(wif)
+	return encodedWIF, nil
+}
 
 // NewPrivateKeyFromWIF creates a PrivateKey struct using a WIF.
 func NewPrivateKeyFromWIF(wif string) (*PrivateKey, error) {

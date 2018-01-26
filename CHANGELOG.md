@@ -5,6 +5,32 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this
 project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## v1.9.2 - 2018-01-26
+
+### Added
+
+- New function to generate a private key
+
+```golang
+privateKey, err := neo.NewPrivateKey()
+if err != nil {
+  log.Fatal(err)
+}
+```
+
+- New function to generate WIF based on Private Key
+
+```golang
+privateKey, err := neo.NewPrivateKey()
+if err != nil {
+  log.Fatal(err)
+}
+wif, err := privateKey.WIF()
+if err != nil {
+  log.Fatal(err)
+}
+
+
 ## v1.9.1 - 2018-01-22
 
 ### Fixed
